@@ -11,7 +11,7 @@ module Libv8
 
         (available_patches - applied_patches).each do |patch|
           puts "Applying #{patch}"
-          `patch -p1 -N < #{patch}`
+          `patch -p1 -N < #{patch}#{' --binary' if RUBY_PLATFORM =~ /mingw/}`
           fail "failed to apply patch #{patch}" unless $?.success?
           f.puts patch
         end
